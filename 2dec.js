@@ -1,5 +1,5 @@
 const fs = require('fs')
-const input = fs.readFileSync('./input.txt', 'utf-8')
+const input = fs.readFileSync('./2dec.txt', 'utf-8')
 
 const fullList = input
   .split('\n')
