@@ -5,13 +5,15 @@ const input = fs.readFileSync('./4dec.txt', 'utf-8')
 const partOne = input
   .split('\n')
   .map(x => x.split(' '))
-  .filter((curr, ind, arr) => ((new Set(curr)).size === curr.length)).length
+  .filter(curr => ((new Set(curr)).size === curr.length))
+  .length
 
 const partTwo = input
   .split('\n')
   .map(x => x.split(' '))
-  .map((curr) => curr.map(val => val.split('').sort().join('')))
-  .filter((curr, ind, arr) => ((new Set(curr)).size === curr.length)).length
+  .map(curr => curr.map(val => val.split('').sort().join('')))
+  .filter(curr => ((new Set(curr)).size === curr.length))
+  .length
 
 console.log(partOne)
 console.log(partTwo)
