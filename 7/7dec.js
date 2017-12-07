@@ -19,9 +19,50 @@ const notTopLevel =
     .filter(x => x.length > 1) // ta bort tomma arrays
     .reduce((acc, curr) => acc.concat(curr), [])) // platta ut till en array
 
-const result = allWords.filter(x => !notTopLevel.has(x)) //Hitta värdet som finns i ena men inte andra
+const topNode = allWords.filter(x => !notTopLevel.has(x)) //Hitta värdet som finns i ena men inte andra
 
-console.log(result)
+//console.log(topNode)
 
 // Part two!
 
+const weightMap = new Map(input
+  .trim()
+  .split('\n')
+  .map(x => x.split(' '))
+  .slice(2)
+  .map(x => [x[0], Number(x[1].substring(1,x[1].length -1))]))
+
+weightMap.set('oweiea', 97)
+weightMap.set('gbyvdfh', 155)
+
+const childMap = new Map(onlyWords
+  .map(x => [x[0], x.slice(1).reduce((acc, curr) => acc.concat(curr), [])]))
+
+
+const totalWeight = function (node) {
+  let children = childMap.get(node)
+
+  if(children.length === 0){
+    return weightMap.get(node)
+  }
+
+  let childWeight = [];
+  let weight = 0;
+  for(let i = 0; i < children.length; i++){
+    let w = totalWeight(children[i])
+    childWeight.push(w)
+    weight += w
+  }
+
+  if(childWeight.length > 0){
+    if(weight !== childWeight[0]*childWeight.length){
+       console.log(node + " my children weigh " + childWeight)
+    }
+  }
+  return weight + weightMap.get(node)
+}
+
+totalWeight(topNode[0])
+
+
+//Then walk backwards in the table
