@@ -8,17 +8,7 @@ let list = input
   .split('\t')
   .map(x => Number(x))
 
-let firstTime = true
-
-while (true) {
-  if (seen.has(list.join(','))) {
-    if(firstTime){
-      seen.clear()
-      firstTime = false
-    } else {
-      break;
-    }
-  }
+while (!seen.has(list.join(','))) {
   seen.add(list.join(','))
   let max = Math.max(...list)
   let maxIndex = list.indexOf(max)
@@ -26,8 +16,6 @@ while (true) {
   for(let i = 1; i <= max; i++) {
     list[(maxIndex + i) % list.length]++
   }
-  console.log(max, maxIndex, list)
 }
-
 
 console.log(seen.size)
