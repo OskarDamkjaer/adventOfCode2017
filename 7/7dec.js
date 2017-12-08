@@ -33,7 +33,7 @@ const weightMap = new Map(input
   .map(x => [x[0], Number(x[1].substring(1,x[1].length -1))]))
 
 weightMap.set('oweiea', 97)
-weightMap.set('gbyvdfh', 155)
+weightMap.set('gbyvdfh', 155) // av outgrundliga anledningar fanns dessa ej i weightmap och gav NaN till allt
 
 const childMap = new Map(onlyWords
   .map(x => [x[0], x.slice(1).reduce((acc, curr) => acc.concat(curr), [])]))
